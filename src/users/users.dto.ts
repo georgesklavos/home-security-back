@@ -12,4 +12,23 @@ export class CreateUserDto {
   @IsDefined()
   @IsEmail()
   email: string;
+
+  @IsDefined()
+  password: string;
+}
+
+export class GetUserDto {
+  
+  @IsDefined()
+  @IsString()
+  firstName: string;
+
+  @IsDefined()
+  @IsString()
+  lastName: string;
+
+  @IsDefined()
+  @IsEmail()
+  email: string;
+
 }
