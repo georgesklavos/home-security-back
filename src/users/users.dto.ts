@@ -1,3 +1,4 @@
+import { Exclude } from 'class-transformer';
 import { IsDefined, IsEmail, IsString } from 'class-validator';
 
 export class CreateUserDto {
@@ -18,7 +19,16 @@ export class CreateUserDto {
 }
 
 export class GetUserDto {
-  
+
+  @Exclude()
+  _id: string;
+
+  @Exclude()
+  admin: boolean;
+
+  @Exclude()
+  password: string;
+
   @IsDefined()
   @IsString()
   firstName: string;
@@ -31,4 +41,17 @@ export class GetUserDto {
   @IsEmail()
   email: string;
 
+  @Exclude()
+  createdAt: Date;
+
+  @Exclude()
+  updatedAt: Date;
+
+  @Exclude()
+  __v: number;
+
+
+  constructor(partial: Partial<GetUserDto>) {
+    Object.assign(this, partial);
+  }
 }
