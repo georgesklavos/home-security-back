@@ -9,4 +9,4 @@ RUN npm run build
 
 EXPOSE $PORT
 
-RUN npm run start:build
+RUN npm run start:prod
