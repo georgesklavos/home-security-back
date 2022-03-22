@@ -5,14 +5,14 @@ import { UsersModule } from './users/users.module';
 import { AlarmsModule } from './alarms/alarms.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { constants } from './constants';
-import { CensorsModule } from './censors/censors.module';
+import { SensorsModule } from './sensors/sensors.module';
 
 @Module({
   imports: [
     UsersModule,
     AlarmsModule,
     MongooseModule.forRoot(constants.dbUrl),
-    CensorsModule,
+    SensorsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

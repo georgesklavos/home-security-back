@@ -19,7 +19,6 @@ export class CreateUserDto {
 }
 
 export class GetUserDto {
-
   @Exclude()
   _id: string;
 
@@ -49,7 +48,6 @@ export class GetUserDto {
 
   @Exclude()
   __v: number;
-
 
   constructor(partial: Partial<GetUserDto>) {
     Object.assign(this, partial);
