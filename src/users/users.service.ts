@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UseGuards } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { User, UserDocument } from '../schemas/user.schema';
 import { InjectModel } from '@nestjs/mongoose';
@@ -20,5 +20,9 @@ export class UsersService {
 
   async getUsers(): Promise<User[]> {
     return await this.userModel.find({ admin: false }).exec();
+  }
+
+  async findUser(email: string): Promise<User> {
+    return await (await this.userModel.findOne({ email })).toJSON();
   }
 }

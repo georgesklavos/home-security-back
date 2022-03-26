@@ -12,8 +12,13 @@ export class AlarmsController {
     return await this.alarmsService.createAlarm(data);
   }
 
+  @Get()
+  async getAllAlarms(): Promise<Alarm[]> {
+    return await this.alarmsService.getAlarms();
+  }
+
   @Get(':id')
-  async getAlarms(@Param('id') userId: string): Promise<Alarm[]> {
-    return await this.alarmsService.getAlarms(userId);
+  async getAlarmsByUser(@Param('id') userId: string): Promise<Alarm[]> {
+    return await this.alarmsService.getAlarmsByUser(userId);
   }
 }

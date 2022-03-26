@@ -15,7 +15,11 @@ export class AlarmsService {
     return await alarm.save();
   }
 
-  async getAlarms(userId): Promise<Alarm[]> {
+  async getAlarms(): Promise<Alarm[]> {
+    return await this.alarmModel.find();
+  }
+
+  async getAlarmsByUser(userId): Promise<Alarm[]> {
     return await this.alarmModel.find({ userId });
   }
 }

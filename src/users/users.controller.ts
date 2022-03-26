@@ -1,15 +1,11 @@
-import {
-  Body,
-  ClassSerializerInterceptor,
-  Controller,
-  Get,
-  Post,
-  UseInterceptors,
-} from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { JwtAuthGaurd } from 'src/auth/jwt.auth.gaurd';
+import { IsAdmin } from 'src/guards/isClient.guard';
 import { User } from 'src/schemas/user.schema';
-import { CreateUserDto, GetUserDto } from './users.dto';
+import { CreateUserDto } from './users.dto';
 import { UsersService } from './users.service';
 
+@UseGuards(JwtAuthGaurd, IsAdmin)
 @Controller('users')
 export class UsersController {
   constructor(private userService: UsersService) {}
@@ -18,6 +14,7 @@ export class UsersController {
   async createUser(@Body() data: CreateUserDto): Promise<User> {
     return await this.userService.create(data);
   }
+
   @Get()
   async getUsers(): Promise<User[]> {
     return await this.userService.getUsers();
