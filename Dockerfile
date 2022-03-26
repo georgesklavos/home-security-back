@@ -5,13 +5,13 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
-RUN npm run build
-
 ARG DATABASE_URL
 ENV DATABASE_URL $DATABASE_URL
 
 ARG SECRET_JWT
 ENV SECRET_JWT $SECRET_JWT
+RUN npm run build
+
 EXPOSE $PORT
 
 RUN npm run start:prod
