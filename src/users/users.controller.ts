@@ -5,6 +5,8 @@ import { User } from 'src/schemas/user.schema';
 import { CreateUserDto } from './users.dto';
 import { UsersService } from './users.service';
 
+console.log(process.env.DATABASE_URL);
+console.log(process.env.SECRET_JWT);
 @UseGuards(JwtAuthGaurd, IsAdmin)
 @Controller('users')
 export class UsersController {
