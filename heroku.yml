@@ -2,5 +2,4 @@ build:
   docker:
     web: Dockerfile
   config:
-    DATABASE_URL: DATABASE_URL
-    SECRET_JWT: SECRET_JWT
+    env_file: .env
