@@ -1,8 +1,10 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { JwtAuthGaurd } from 'src/auth/jwt.auth.gaurd';
+import { IsAdmin } from 'src/guards/isAdmin.guard';
 import { Alarm } from 'src/schemas/alarm.schema';
 import { AlarmsService } from './alarms.service';
 import { createAlarmDto } from './createAlarm.dto';
-
+@UseGuards(JwtAuthGaurd, IsAdmin)
 @Controller('alarms')
 export class AlarmsController {
   constructor(private alarmsService: AlarmsService) {}

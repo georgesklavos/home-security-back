@@ -15,6 +15,8 @@ export class User {
   password: string;
   @Prop({ default: false })
   admin: boolean;
+  @Prop({ default: '' })
+  androidId: string;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

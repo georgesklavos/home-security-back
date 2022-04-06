@@ -1,8 +1,18 @@
-import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Put,
+  UseGuards,
+} from '@nestjs/common';
+import { JwtAuthGaurd } from 'src/auth/jwt.auth.gaurd';
+import { IsAdmin } from 'src/guards/isAdmin.guard';
 import { Sensor } from 'src/schemas/sensor.schema';
 import { SensorsService } from './sensors.service';
 import { updateSensorDto } from './updateSensor.dto';
-
+@UseGuards(JwtAuthGaurd, IsAdmin)
 @Controller('sensors')
 export class SensorsController {
   constructor(private sensorsService: SensorsService) {}

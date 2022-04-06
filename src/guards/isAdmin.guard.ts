@@ -8,8 +8,8 @@ export class IsAdmin implements CanActivate {
   ): boolean | Promise<boolean> | Observable<boolean> {
     const request = context.switchToHttp().getRequest();
     if (request.user.admin) {
-      return false;
+      return true;
     }
-    return true;
+    return false;
   }
 }

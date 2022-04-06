@@ -8,6 +8,8 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { SensorsModule } from './sensors/sensors.module';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
+import { AlarmsLimitedModule } from './limited/alarms/alarms.module';
+import { SensorsLimitedModule } from './limited/sensors/sensors.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -19,6 +21,8 @@ import { AuthModule } from './auth/auth.module';
     MongooseModule.forRoot(process.env.DATABASE_URL),
     SensorsModule,
     AuthModule,
+    AlarmsLimitedModule,
+    SensorsLimitedModule,
   ],
   controllers: [AppController],
   providers: [AppService],

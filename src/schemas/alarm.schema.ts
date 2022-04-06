@@ -8,7 +8,7 @@ export type AlarmDocument = Alarm & Document;
 @Schema({ timestamps: true })
 export class Alarm {
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })
-  userId: User;
+  public userId: User;
   @Prop({ default: false })
   active: boolean;
 }

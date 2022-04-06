@@ -1,8 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import axios from 'axios';
 
 @Injectable()
-export class AppService {
-  hello(): string {
-    return 'Hello World!';
-  }
-}
+export class AppService {}

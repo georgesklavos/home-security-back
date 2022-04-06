@@ -1,5 +1,5 @@
 import { Exclude } from 'class-transformer';
-import { IsDefined, IsEmail, IsString } from 'class-validator';
+import { IsDefined, IsEmail, IsOptional, IsString } from 'class-validator';
 
 export class CreateUserDto {
   @IsDefined()
