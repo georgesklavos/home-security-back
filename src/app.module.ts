@@ -10,6 +10,7 @@ import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { AlarmsLimitedModule } from './limited/alarms/alarms.module';
 import { SensorsLimitedModule } from './limited/sensors/sensors.module';
+import { TimelineModule } from './limited/timeline/timeline.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -23,6 +24,7 @@ import { SensorsLimitedModule } from './limited/sensors/sensors.module';
     AuthModule,
     AlarmsLimitedModule,
     SensorsLimitedModule,
+    TimelineModule,
   ],
   controllers: [AppController],
   providers: [AppService],
