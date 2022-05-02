@@ -22,6 +22,11 @@ export class SensorsController {
     return this.sensorsService.createSensor(data);
   }
 
+  @Get()
+  getAllSensors(): Promise<Sensor[]> {
+    return this.sensorsService.getAllSensors();
+  }
+
   @Get(':id')
   getSensors(@Param('id') alarmId: string): Promise<Sensor[]> {
     return this.sensorsService.getSensors(alarmId);

@@ -16,6 +16,10 @@ export class SensorsService {
     return await sensor.save();
   }
 
+  async getAllSensors(): Promise<Sensor[]> {
+    return await this.sensorModel.find();
+  }
+
   async getSensors(alarmId): Promise<Sensor[]> {
     return await this.sensorModel.find({ alarmId });
   }
