@@ -1,4 +1,4 @@
-import { IsBoolean, IsDefined, IsMongoId } from 'class-validator';
+import { IsBoolean, IsDefined, IsMongoId, IsString } from 'class-validator';
 
 export class createAlarmDto {
   @IsDefined()
@@ -8,4 +8,8 @@ export class createAlarmDto {
   @IsDefined()
   @IsBoolean()
   active: boolean;
+
+  @IsDefined()
+  @IsString()
+  name: string;
 }

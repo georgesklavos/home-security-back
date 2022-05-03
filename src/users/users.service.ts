@@ -25,4 +25,13 @@ export class UsersService {
   async findUser(email: string): Promise<User> {
     return await (await this.userModel.findOne({ email })).toJSON();
   }
+
+  async updateAndroidToken({ user }, token: string) {
+    console.log(user);
+    console.log(token);
+    return await this.userModel.updateOne(
+      { _id: user._id },
+      { $set: { androidId: token } },
+    );
+  }
 }

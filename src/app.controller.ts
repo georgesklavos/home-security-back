@@ -1,40 +1,22 @@
+import { Headers } from '@nestjs/common';
 import { Controller, Post, Request, UseGuards } from '@nestjs/common';
-import axios from 'axios';
 import { AppService } from './app.service';
 import { AuthService } from './auth/auth.service';
 import { LocalAuthGuard } from './auth/local-auth.gaurd';
+import { UsersService } from './users/users.service';
 
 @Controller()
 export class AppController {
   constructor(
     private readonly authService: AuthService,
     private readonly appService: AppService,
+    private readonly usersService: UsersService,
   ) {}
 
   @UseGuards(LocalAuthGuard)
   @Post('login')
-  login(@Request() req) {
-    console.log(this.authService.login(req.user));
+  async login(@Request() req, @Headers() headers) {
+    await this.usersService.updateAndroidToken(req, headers.androidtoken);
     return this.authService.login(req.user);
   }
-
-  // @Post('notification')
-  // async sendNotification() {
-  //   try {
-  //     await axios.post(
-  //       `https://fcm.googleapis.com/fcm/send`,
-  //       {
-  //         message: '3x1',
-  //       },
-  //       {
-  //         headers: {
-  //           'Content-Type': 'application/json',
-  //           'Authorization': `key=${process.env.FIREBASE_TOKEN}`,
-  //         },
-  //       },
-  //     );
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // }
 }

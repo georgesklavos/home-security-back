@@ -9,6 +9,8 @@ export type AlarmDocument = Alarm & Document;
 export class Alarm {
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })
   public userId: User;
+  @Prop()
+  name: string;
   @Prop({ default: false })
   active: boolean;
 }
