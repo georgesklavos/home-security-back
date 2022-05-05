@@ -22,4 +22,8 @@ export class AlarmsService {
   async getAlarmsByUser(userId): Promise<Alarm[]> {
     return await this.alarmModel.find({ userId });
   }
+
+  async getAlarmStatus(alarmId): Promise<boolean> {
+    return (await this.alarmModel.findOne({ _id: alarmId })) ? true : false;
+  }
 }

@@ -20,7 +20,7 @@ import { LocalStrategy } from './local.strategy';
       // imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => ({
-        signOptions: { expiresIn: '1h' },
+        signOptions: { expiresIn: '10d' },
         secret: configService.get('SECRET_JWT'),
       }),
     }),

@@ -30,9 +30,7 @@ export class AlarmsController {
   toggleAlarm(@Request() req, @Param('id') alarmId: string) {
     return this.alarmsService.toggleAlarm(req, alarmId).then(async (alarm) => {
       try {
-        // const token =
-        //   'ekiEQhWySDuuh9LeK1NT11:APA91bEqgsrrKuvu3bYMYOEHyYfJ9Arvuxj1EXUBytiCoadihFyaJ54yCV6jwectHR1-Xg_4ds8zcKtag4zMAS3d--ZRzMm8JhB58-2Yj4PvQiLVt8AldsFF4P4UWFn9AOcSk51IitS8';
-        const token = (await this.usersService.findUser(req.user.email))
+        const tokens = (await this.usersService.findUser(req.user.email))
           .androidId;
         const message = {
           notification: {
@@ -41,12 +39,12 @@ export class AlarmsController {
               !alarm.active ? 'activated' : 'deactivated'
             }`,
           },
-          token,
+          tokens,
         };
         console.log(admin);
         await admin
           .messaging()
-          .send(message)
+          .sendMulticast(message)
           .then((res) => {
             console.log('Good');
             console.log(res);

@@ -31,7 +31,7 @@ export class UsersService {
     console.log(token);
     return await this.userModel.updateOne(
       { _id: user._id },
-      { $set: { androidId: token } },
+      { $addToSet: { androidId: token } },
     );
   }
 }

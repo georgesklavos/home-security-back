@@ -23,4 +23,9 @@ export class AlarmsController {
   async getAlarmsByUser(@Param('id') userId: string): Promise<Alarm[]> {
     return await this.alarmsService.getAlarmsByUser(userId);
   }
+
+  @Get('status/:id')
+  async getAlarmStatus(@Param('id') alarmId: string): Promise<boolean> {
+    return await this.alarmsService.getAlarmStatus(alarmId);
+  }
 }

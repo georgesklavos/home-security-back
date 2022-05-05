@@ -11,12 +11,14 @@ import { AuthModule } from './auth/auth.module';
 import { AlarmsLimitedModule } from './limited/alarms/alarms.module';
 import { SensorsLimitedModule } from './limited/sensors/sensors.module';
 import { TimelineModule } from './limited/timeline/timeline.module';
+import { AlarmsDeviceModule } from './device/alarms/alarms.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
       cache: true,
     }),
+    AlarmsDeviceModule,
     UsersModule,
     AlarmsModule,
     MongooseModule.forRoot(process.env.DATABASE_URL),
