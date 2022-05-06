@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Sensor, SensorDocument } from 'src/schemas/sensor.schema';
 import { Model } from 'mongoose';
 import { updateSensorDto } from './updateSensor.dto';
+import { createSensorDto } from './createSensor.dto';
 
 @Injectable()
 export class SensorsService {
@@ -11,7 +12,7 @@ export class SensorsService {
     private sensorModel: Model<SensorDocument>,
   ) {}
 
-  async createSensor(data): Promise<Sensor> {
+  async createSensor(data: createSensorDto): Promise<Sensor> {
     const sensor = new this.sensorModel(data);
     return await sensor.save();
   }

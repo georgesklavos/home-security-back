@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Alarm, AlarmDocument } from 'src/schemas/alarm.schema';
 import { Model } from 'mongoose';
+import { createAlarmDto } from './createAlarm.dto';
 
 @Injectable()
 export class AlarmsService {
@@ -10,7 +11,7 @@ export class AlarmsService {
     private alarmModel: Model<AlarmDocument>,
   ) {}
 
-  async createAlarm(data): Promise<Alarm> {
+  async createAlarm(data: createAlarmDto): Promise<Alarm> {
     const alarm = new this.alarmModel(data);
     return await alarm.save();
   }
@@ -21,9 +22,5 @@ export class AlarmsService {
 
   async getAlarmsByUser(userId): Promise<Alarm[]> {
     return await this.alarmModel.find({ userId });
-  }
-
-  async getAlarmStatus(alarmId): Promise<boolean> {
-    return (await this.alarmModel.findOne({ _id: alarmId })) ? true : false;
   }
 }

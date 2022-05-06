@@ -6,22 +6,22 @@ import { Model } from 'mongoose';
 @Injectable()
 export class AlarmsService {
   constructor(
-    @InjectModel(Alarm.name) private alarmService: Model<AlarmDocument>,
+    @InjectModel(Alarm.name) private alarmModel: Model<AlarmDocument>,
   ) {}
 
   async getAlarms({ user }): Promise<Alarm[]> {
-    return await this.alarmService.find({ userId: user.id });
+    return await this.alarmModel.find({ userId: user.id });
   }
 
   async toggleAlarm({ user }, alarmId) {
-    const alarm = await this.alarmService.findOne({
+    const alarm = await this.alarmModel.findOne({
       _id: alarmId,
       userId: user.id,
     });
     if (!alarm) {
       throw new NotFoundException();
     }
-    return this.alarmService.findOneAndUpdate(
+    return this.alarmModel.findOneAndUpdate(
       { _id: alarmId },
       { $set: { active: !alarm.active } },
     );

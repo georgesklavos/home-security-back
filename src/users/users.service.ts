@@ -26,6 +26,10 @@ export class UsersService {
     return await (await this.userModel.findOne({ email })).toJSON();
   }
 
+  async findUserById(id): Promise<User> {
+    return await (await this.userModel.findOne({ _id: id })).toJSON();
+  }
+
   async updateAndroidToken({ user }, token: string) {
     console.log(user);
     console.log(token);
