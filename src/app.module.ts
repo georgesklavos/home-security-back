@@ -12,12 +12,14 @@ import { AlarmsLimitedModule } from './limited/alarms/alarms.module';
 import { SensorsLimitedModule } from './limited/sensors/sensors.module';
 import { TimelineModule } from './limited/timeline/timeline.module';
 import { AlarmsDeviceModule } from './device/alarms/alarms.module';
+import { UsersLimitedModule } from './limited/users/users.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
       cache: true,
     }),
+    UsersLimitedModule,
     AlarmsDeviceModule,
     UsersModule,
     AlarmsModule,

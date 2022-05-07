@@ -14,8 +14,22 @@ export class CreateUserDto {
   @IsEmail()
   email: string;
 
-  @IsDefined()
+  @IsOptional()
   password: string;
+}
+
+export class UpdateUserDto {
+  @IsDefined()
+  @IsString()
+  firstName: string;
+
+  @IsDefined()
+  @IsString()
+  lastName: string;
+
+  @IsDefined()
+  @IsEmail()
+  email: string;
 }
 
 export class GetUserDto {

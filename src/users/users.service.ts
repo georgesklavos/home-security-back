@@ -2,7 +2,7 @@ import { Injectable, UseGuards } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { User, UserDocument } from '../schemas/user.schema';
 import { InjectModel } from '@nestjs/mongoose';
-import { CreateUserDto, GetUserDto } from './users.dto';
+import { CreateUserDto, GetUserDto, UpdateUserDto } from './users.dto';
 import * as bcrypt from 'bcrypt';
 
 @Injectable()
@@ -18,16 +18,24 @@ export class UsersService {
     return await user.save();
   }
 
+  async updateUser(data: UpdateUserDto): Promise<User> {
+    return await this.userModel.findOneAndUpdate({ email: data.email }, data);
+  }
+
   async getUsers(): Promise<User[]> {
     return await this.userModel.find({ admin: false }).exec();
   }
 
   async findUser(email: string): Promise<User> {
-    return await (await this.userModel.findOne({ email })).toJSON();
+    const tempUser = await this.userModel.findOne({ email });
+    if (tempUser) {
+      return await tempUser.toJSON();
+    }
+    return tempUser;
   }
 
   async findUserById(id): Promise<User> {
-    return await (await this.userModel.findOne({ _id: id })).toJSON();
+    return await this.userModel.findOne({ _id: id });
   }
 
   async updateAndroidToken({ user }, token: string) {
