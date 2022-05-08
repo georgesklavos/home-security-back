@@ -28,3 +28,29 @@ export async function toggleAlarmNotification(alarm: Alarm, tokens) {
     console.log(err);
   }
 }
+
+export async function triggerAlarmNotification(alarm: Alarm, tokens) {
+  try {
+    const message = {
+      notification: {
+        title: 'Alarm triggered',
+        body: `Your alarm ${alarm.name} has been triggered`,
+      },
+      tokens,
+    };
+    console.log(admin);
+    await admin
+      .messaging()
+      .sendMulticast(message)
+      .then((res) => {
+        console.log('Good');
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log('Bad');
+        console.log(err);
+      });
+  } catch (err) {
+    console.log(err);
+  }
+}

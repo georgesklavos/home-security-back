@@ -1,7 +1,18 @@
-import { Controller, Get, Param, Put, Request, UsePipes } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+  Post,
+  Put,
+  Request,
+  UsePipes,
+} from '@nestjs/common';
 import { ValidateMongoId } from 'src/pipes/mongoId.pipe';
 import { UsersService } from 'src/users/users.service';
-import { toggleAlarmNotification } from 'src/utilities/notifications';
+import {
+  toggleAlarmNotification,
+  triggerAlarmNotification,
+} from 'src/utilities/notifications';
 import { AlarmsService } from './alarms.service';
 
 @Controller('device/alarms')
@@ -24,6 +35,16 @@ export class AlarmsController {
       const tokens = (await this.usersService.findUserById(alarm.userId))
         .androidId;
       toggleAlarmNotification(alarm, tokens);
+    });
+  }
+
+  @Post('trigger/:id')
+  @UsePipes(new ValidateMongoId())
+  async triggerAlarm(@Param('id') alarmId: string) {
+    return this.alarmsService.getAlarm(alarmId).then(async (alarm) => {
+      const tokens = (await this.usersService.findUserById(alarm.userId))
+        .androidId;
+      triggerAlarmNotification(alarm, tokens);
     });
   }
 }

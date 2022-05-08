@@ -26,4 +26,8 @@ export class AlarmsService {
       { $set: { active: !alarm.active } },
     );
   }
+
+  async getAlarm(alarmId): Promise<Alarm> {
+    return await this.alarmModel.findOne({ _id: alarmId });
+  }
 }
